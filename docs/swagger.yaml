@@ -1,0 +1,139 @@
+definitions:
+  category.Category:
+    properties:
+      createdBy:
+        type: string
+      id:
+        type: string
+      parentId:
+        type: string
+      title:
+        type: string
+    type: object
+  task.Task:
+    properties:
+      category:
+        type: string
+      created_at:
+        type: integer
+      description:
+        type: string
+      id:
+        type: string
+      location:
+        type: string
+      posted_by:
+        type: string
+      title:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /categories:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new category to the database
+      parameters:
+      - description: category Data
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/category.Category'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/category.Category'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new category
+      tags:
+      - categories
+  /categories/{id}:
+    get:
+      description: Retrieves a category by its ID
+      parameters:
+      - description: category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/category.Category'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a category by ID
+      tags:
+      - categories
+  /tasks:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new task to the database
+      parameters:
+      - description: Task Data
+        in: body
+        name: task
+        required: true
+        schema:
+          $ref: '#/definitions/task.Task'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/task.Task'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new task
+      tags:
+      - tasks
+  /tasks/{id}:
+    get:
+      description: Retrieves a task by its ID
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/task.Task'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a task by ID
+      tags:
+      - tasks
+swagger: "2.0"
